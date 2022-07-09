@@ -25,6 +25,16 @@ sudo chmod 444 /etc/resolv.conf
 sudo cp ~/openwhisk/Makefile ~/openwhisk-devtools/docker-compose/Makefile
 sudo make -C openwhisk-devtools/docker-compose/ quick-start
 
+# Install Java & JMeter
+sudo apt update
+sudo apt install openjdk-11-jdk --assume-yes
+sudo wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.4.3.zip
+sudo unzip apache-jmeter-5.4.3.zip
+sudo mv apache-jmeter-5.4.3 jmeter
+sudo mv jmeter /tmp
+echo 'export PATH="$PATH:/tmp/jmeter/bin"' >> ~/.bashrc
+source ~/.bashrc
+
 # Install OpenWhisk CLI
 sudo cp openwhisk/wsk /usr/bin
 sudo chmod +x /usr/bin/wsk
