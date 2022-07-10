@@ -9,14 +9,15 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 # Install Docker Engine
 sudo apt-get update
 sudo apt-get install --assume-yes docker-ce docker-ce-cli containerd.io docker-compose-plugin
-sudo docker --version
+#sudo docker --version
 sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-sudo docker-compose --version
+#sudo docker-compose --version
 
 # Install OpenWhisk
 sudo git clone https://github.com/apache/openwhisk-devtools.git
+sudo cp ~/openwhisk/openwhisk-devtools ~/
 sudo apt --assume-yes install make zip unzip python-pip # npm 
 #sudo git clone https://github.com/ryanbannon/openwhisk.git
 sudo unlink /etc/resolv.conf
@@ -36,6 +37,6 @@ sudo make -C openwhisk-devtools/docker-compose/ quick-start
 #source ~/.bashrc
 
 # Install OpenWhisk CLI
-sudo cp openwhisk/wsk /usr/bin
+sudo cp ~/openwhisk/wsk /usr/bin
 sudo chmod +x /usr/bin/wsk
 sudo wsk property set --apihost 'localhost' --auth '23bc46b1-71f6-4ed5-8c54-816aa4f8c502:123zO3xZCLrMN6v2BKK1dXYFpXlPkccOFqm12CdAsMgRU4VrNZ9lyGVCGuMDGIwP'
