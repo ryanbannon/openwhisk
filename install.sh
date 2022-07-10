@@ -18,7 +18,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 # Install OpenWhisk
 sudo git clone https://github.com/apache/openwhisk-devtools.git
 sudo cp ~/openwhisk/openwhisk-devtools ~/
-sudo apt --assume-yes install make zip unzip python-pip # npm 
+sudo apt --assume-yes install make npm zip unzip python-pip 
 #sudo git clone https://github.com/ryanbannon/openwhisk.git
 sudo unlink /etc/resolv.conf
 sudo cp ~/openwhisk/resolv.conf /etc/resolv.conf
