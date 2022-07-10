@@ -17,24 +17,22 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 # Install OpenWhisk
 sudo git clone https://github.com/apache/openwhisk-devtools.git
-sudo cp ~/openwhisk/openwhisk-devtools ~/
 sudo apt --assume-yes install make npm zip unzip python-pip 
-#sudo git clone https://github.com/ryanbannon/openwhisk.git
 sudo unlink /etc/resolv.conf
 sudo cp ~/openwhisk/resolv.conf /etc/resolv.conf
 sudo chmod 444 /etc/resolv.conf
 sudo cp ~/openwhisk/Makefile ~/openwhisk-devtools/docker-compose/Makefile
-sudo make -C openwhisk-devtools/docker-compose/ quick-start
+sudo make -C ~/openwhisk-devtools/docker-compose/ quick-start
 
 # Install Java & JMeter
-#sudo apt update
-#sudo apt install openjdk-11-jdk --assume-yes
-#sudo wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.4.3.zip
-#sudo unzip apache-jmeter-5.4.3.zip
-#sudo mv apache-jmeter-5.4.3 jmeter
-#sudo mv jmeter /tmp
-#echo 'export PATH="$PATH:/tmp/jmeter/bin"' >> ~/.bashrc
-#source ~/.bashrc
+sudo apt update
+sudo apt install openjdk-11-jdk --assume-yes
+sudo wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.4.3.zip
+sudo unzip apache-jmeter-5.4.3.zip
+sudo mv apache-jmeter-5.4.3 jmeter
+sudo mv jmeter /tmp
+echo 'export PATH="$PATH:/tmp/jmeter/bin"' >> ~/.bashrc
+source ~/.bashrc
 
 # Install OpenWhisk CLI
 sudo cp ~/openwhisk/wsk /usr/bin
