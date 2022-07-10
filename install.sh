@@ -17,7 +17,7 @@ sudo docker-compose --version
 
 # Install OpenWhisk
 sudo git clone https://github.com/apache/openwhisk-devtools.git
-sudo apt --assume-yes install make npm zip unzip python-pip
+sudo apt --assume-yes install make zip unzip python-pip # npm 
 #sudo git clone https://github.com/ryanbannon/openwhisk.git
 sudo unlink /etc/resolv.conf
 sudo cp ~/openwhisk/resolv.conf /etc/resolv.conf
