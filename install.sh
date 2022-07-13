@@ -36,6 +36,8 @@ sudo mv apache-jmeter-5.4.3 jmeter
 sudo mv jmeter /tmp
 echo 'export PATH="$PATH:/tmp/jmeter/bin"' >> ~/.bashrc
 source ~/.bashrc
+sudo cp ~/openwhisk/experiment_1_logs.csv /home/ubuntu/
+sudo cp ~/openwhisk/experiment_2_logs.csv /home/ubuntu/
 
 # Install OpenWhisk CLI
 sudo cp ~/openwhisk/wsk /usr/bin
