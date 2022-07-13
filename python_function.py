@@ -13,8 +13,8 @@ def main():
             prime.append(i)
     num = random.sample(prime, 1)
     now = datetime.now()
-    string = str("The random prime number this "+now.strftime("%A")+" at "+now.strftime("%R")+" is: "+str(num[0]))
-    print(string)
-    return string
+    message = str("The random prime number this "+now.strftime("%A")+" at "+now.strftime("%R")+" is: "+str(num[0]))
+    print(message)
+    return {"message": message}
 
 main()
