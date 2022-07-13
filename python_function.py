@@ -1,7 +1,7 @@
 from datetime import datetime
 import random
 
-def main():
+def main(args):
     startNumber = 1
     endNumber = 10000
     prime = []
@@ -16,5 +16,3 @@ def main():
     message = str("The random prime number this "+now.strftime("%A")+" at "+now.strftime("%R")+" is: "+str(num[0]))
     print(message)
     return {"message": message}
-
-main()
