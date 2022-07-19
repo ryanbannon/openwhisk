@@ -9,3 +9,5 @@
 
 ### Server 2:
 `jmeter -n -t "/home/ubuntu/openwhisk/jmeter/Experiment_2/Experiment_2.jmx" -l "/home/ubuntu/experiment_2_logs.csv"`
+
+test
