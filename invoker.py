@@ -12,11 +12,12 @@ def container_exists(container):
     return (exists)
 
 def execute(container):
-    print("Start:",datetime.now())
+    start_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     if container_exists(container):
         print("Container", container, "exists!")
     else:
         print("Container", container, "doesn't exist!")
-    print("End:",datetime.now())
+    end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(start_time, end_time)
 
 execute('abc_123')
