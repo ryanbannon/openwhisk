@@ -59,7 +59,7 @@ def serverless_func(container):
         print("Container", container, "doesnt exist!")
         name = create_container(container,False,count) # Count = 0
 
-    execute(container)
+    #execute(container)
 
     end_time_obj = datetime.now()
     end_time = end_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
