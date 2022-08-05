@@ -43,7 +43,8 @@ def serverless_func(container):
     if exists:
         print("Container", container, "exists!")
         if container_in_use(container):
-            create_container(container,True,count)
+            print("In use:",container_in_use(container))
+            #create_container(container,True,count)
         #execute(container)
     else:
         print("Container", container, "doesnt exist!")
