@@ -49,8 +49,8 @@ def execute(container,function):
 def serverless_func(container,function):
     start_time_obj = datetime.now()
     start_time = start_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
-    container = "expr_"+container
-    function = function+".py"
+    container = "expr_"+str(container)
+    function = str(function)+".py"
     exists, list = container_exists(container)
     count = len(list)
     if exists:
