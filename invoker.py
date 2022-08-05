@@ -9,18 +9,25 @@ def container_exists(container):
         exists = 1
     else:
         exists = 0
-    return (exists)
+    return (exists,int(count))
 
 def execute(container):
+    print("Container", container, "exists!")
+
+def serverless_func(container):
     start_time_obj = datetime.now()
     start_time = start_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
-    if container_exists(container):
-        print("Container", container, "exists!")
+    
+    exists, count = container_exists(container)
+    if exists:
+        execute(container)
     else:
         print("Container", container, "doesn't exist!")
+
     end_time_obj = datetime.now()
     end_time = end_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
     time_diff = end_time_obj - start_time_obj
     print(start_time, end_time, time_diff.total_seconds())
+    print(count)
 
-execute('abc_123')
+serverless_func('abc_123')
