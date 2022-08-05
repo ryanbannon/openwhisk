@@ -12,13 +12,15 @@ def container_exists(container):
     return (exists)
 
 def execute(container):
-    start_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
+    start_time_obj = datetime.now()
+    start_time = start_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
     if container_exists(container):
         print("Container", container, "exists!")
     else:
         print("Container", container, "doesn't exist!")
-    end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
-    time_diff = end_time - start_time
+    end_time_obj = datetime.now()
+    end_time = end_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
+    time_diff = end_time_obj - start_time_obj
     print(start_time, end_time, time_diff.total_seconds())
 
 execute('abc_123')
