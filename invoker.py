@@ -54,6 +54,7 @@ def serverless_func(container):
     count = len(list)
     if exists:
         print("Container", container, "exists!")
+        print(list)
         name = list[0]
     else:
         print("Container", container, "doesnt exist!")
