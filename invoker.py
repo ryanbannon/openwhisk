@@ -68,6 +68,6 @@ def serverless_func(container,function):
     end_time_obj = datetime.now()
     end_time = end_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
     time_diff = end_time_obj - start_time_obj
-    print(start_time, end_time, time_diff.total_seconds()*1000)
+    print(start_time, end_time, int(time_diff.total_seconds()*1000))
 
 serverless_func(sys.argv[1],sys.argv[2])
