@@ -35,21 +35,22 @@ def create_container(container,in_use,count):
     os.popen(cmd)
     return name
 
-def execute(container):
+def execute(container,function):
     print("Container", container, "exists!")
-    cmd = "docker cp test_function.py %s:/foo/"%(container)
+    cmd = "docker cp test_function.py %s:/foo/"%(container,function)
     os.popen(cmd)
-    cmd2 = "docker exec -i %s python test_function.py"%(container)
+    cmd2 = "docker exec -i %s python test_function.py"%(container,function)
     os.popen(cmd2)
     cmd3 = "docker container kill %s"%(container)
     os.popen(cmd3)
     cmd4 = "docker container rm %s"%(container)
     os.popen(cmd4)
 
-def serverless_func(container):
+def serverless_func(container,function):
     start_time_obj = datetime.now()
     start_time = start_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
-    
+    container = "expr_"+container
+    function = function+".py"
     exists, list = container_exists(container)
     count = len(list)
     if exists:
@@ -61,11 +62,11 @@ def serverless_func(container):
         name = create_container(container=container,in_use=False,count=count) # Count = 0
 
     print("Execute",name)
-    execute(name)
+    execute(name,function)
 
     end_time_obj = datetime.now()
     end_time = end_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
     time_diff = end_time_obj - start_time_obj
     print(start_time, end_time, time_diff.total_seconds())
 
-serverless_func('abc_123')
+serverless_func('abc_123','test_function')
