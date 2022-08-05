@@ -6,7 +6,6 @@ def container_exists(container):
     list = os.popen(cmd).readlines()
     cmd2 = "docker ps --format '{{.Names}}' | grep %s | wc -l"%(container)
     count =  os.popen(cmd2).read().strip()
-
     if int(count) >= 1:
         exists = True
     else:
@@ -16,7 +15,6 @@ def container_exists(container):
 def container_in_use(container):
     cmd = "ps -ef | grep %s | grep docker | wc -l"%(container)
     count =  os.popen(cmd).read().strip()
-    print(count)
     if int(count) >= 1:
         in_use = True
     else:
@@ -37,13 +35,13 @@ def create_container(container,in_use,count):
 
 def execute(container):
     print("Container", container, "exists!")
-    cmd = "docker cp test_function.py abc_123:/foo/"
+    cmd = "docker cp test_function.py %s:/foo/"%(container)
     os.popen(cmd)
-    cmd2 = "docker exec -i abc_123 python test_function.py"
+    cmd2 = "docker exec -i %s python test_function.py"%(container)
     os.popen(cmd2)
-    cmd3 = "docker container kill abc_123"
+    cmd3 = "docker container kill %s"%(container)
     os.popen(cmd2)
-    cmd4 = "docker container rm abc_123"
+    cmd4 = "docker container rm %s"%(container)
     os.popen(cmd2)
 
 def serverless_func(container):
@@ -58,10 +56,10 @@ def serverless_func(container):
         name = list[0].rstrip('\n')
     else:
         print("Container", container, "doesnt exist!")
-        name = create_container(container,False,count) # Count = 0
+        name = create_container(container=container,in_use=False,count=count) # Count = 0
 
     print("Execute",name)
-    #execute(container)
+    execute(name)
 
     end_time_obj = datetime.now()
     end_time = end_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
