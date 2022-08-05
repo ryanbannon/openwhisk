@@ -3,7 +3,7 @@ import os
 
 def container_exists(container):
     cmd = "docker ps --format '{{.Names}}' | grep %s"%(container)
-    list = os.popen(cmd).read().strip()
+    list = os.popen(cmd).readlines()#.read().strip()
     cmd2 = "docker ps --format '{{.Names}}' | grep %s | wc -l"%(container)
     count =  os.popen(cmd2).read().strip()
 
