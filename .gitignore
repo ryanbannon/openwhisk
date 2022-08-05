@@ -1,4 +1,3 @@
 .vscode/*
 *.pem
 controller.py
-invoker.py
