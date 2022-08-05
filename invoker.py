@@ -70,5 +70,6 @@ def serverless_func(container,function):
     time_diff = end_time_obj - start_time_obj
     print(start_time, end_time, time_diff.total_seconds())
 
-serverless_func('abc_123','test_function')
-print(sys.argv[1])
+serverless_func(sys.argv[1],sys.argv[2])
+print(sys.argv[1],sys.argv[2])
+#'abc_123','test_function'
