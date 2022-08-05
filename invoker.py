@@ -6,9 +6,9 @@ def container_exists(container):
     count =  os.popen(cmd).read().strip()
 
     if int(count) >= 1:
-        exists = 1
+        exists = True
     else:
-        exists = 0
+        exists = False
     return (exists,int(count))
 
 def container_in_use(container):
@@ -16,9 +16,9 @@ def container_in_use(container):
     count =  os.popen(cmd).read().strip()
 
     if int(count) >= 1:
-        in_use  = 1
+        in_use = True
     else:
-        in_use = 0
+        in_use = False
     return (in_use)
 
 def create_container(container,in_use,count):
