@@ -11,6 +11,16 @@ def container_exists(container):
         exists = 0
     return (exists,int(count))
 
+def container_in_use(container):
+    cmd = "ps -ef | grep %s | grep docker | wc -l"%(container)
+    count =  os.popen(cmd).read().strip()
+
+    if int(count) >= 1:
+        in_use  = 1
+    else:
+        in_use = 0
+    return (in_use)
+
 def create_container(container,in_use,count):
     if in_use:
         print("Creating container because others are in use")
@@ -32,17 +42,18 @@ def serverless_func(container):
     exists, count = container_exists(container)
     if exists:
         print("Container", container, "exists!")
-        #if in use:
-            #create_container(container,True,count)
+        if container_in_use(container):
+            create_container(container,True,count)
         #execute(container)
     else:
         print("Container", container, "doesnt exist!")
         create_container(container,False,count) # Count = 0
 
+    #execute(container)
+
     end_time_obj = datetime.now()
     end_time = end_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
     time_diff = end_time_obj - start_time_obj
     print(start_time, end_time, time_diff.total_seconds())
-    print(count)
 
 serverless_func('abc_123')
