@@ -7,12 +7,11 @@ def container_exists(container):
     cmd2 = "docker ps --format '{{.Names}}' | grep %s | wc -l"%(container)
     count =  os.popen(cmd2).read().strip()
 
-    print(list)
     if int(count) >= 1:
         exists = True
     else:
         exists = False
-    return (exists,int(count))
+    return (exists,list)
 
 def container_in_use(container):
     cmd = "ps -ef | grep %s | grep docker | wc -l"%(container)
@@ -51,7 +50,8 @@ def serverless_func(container):
     start_time_obj = datetime.now()
     start_time = start_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
     
-    exists, count = container_exists(container)
+    exists, list = container_exists(container)
+    count = len(list)
     if exists:
         print("Container", container, "exists!")
         
