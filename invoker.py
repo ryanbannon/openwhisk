@@ -14,7 +14,7 @@ def container_exists(container):
 def container_in_use(container):
     cmd = "ps -ef | grep %s | grep docker | wc -l"%(container)
     count =  os.popen(cmd).read().strip()
-
+    print(count)
     if int(count) >= 1:
         in_use = True
     else:
