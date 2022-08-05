@@ -37,7 +37,7 @@ def create_container(container,in_use,count):
 
 def execute(container,function):
     print("Container", container, "exists!")
-    cmd = "docker cp %s %s:/foo/"%(container,function)
+    cmd = "docker cp %s %s:/foo/"%(function,container)
     os.popen(cmd)
     cmd2 = "docker exec -i %s python %s"%(container,function)
     os.popen(cmd2)
