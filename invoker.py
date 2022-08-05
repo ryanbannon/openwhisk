@@ -54,11 +54,12 @@ def serverless_func(container):
     count = len(list)
     if exists:
         print("Container", container, "exists!")
-        
+        name = list[0]
     else:
         print("Container", container, "doesnt exist!")
         name = create_container(container,False,count) # Count = 0
 
+    print("Execute",name)
     #execute(container)
 
     end_time_obj = datetime.now()
