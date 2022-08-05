@@ -11,8 +11,19 @@ def container_exists(container):
         exists = 0
     return (exists,int(count))
 
+def create_container(container,in_use,count):
+    if in_use:
+        print("Creating container because others are in use")
+        cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_%s python:3"%(container,count+1)
+    else:
+        print("Creating container because none exist")
+        cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_1 python:3"%container
+    os.popen(cmd)
+
 def execute(container):
     print("Container", container, "exists!")
+    cmd = "docker cp test_function.py abc_123:/foo/"
+    os.popen(cmd)
 
 def serverless_func(container):
     start_time_obj = datetime.now()
@@ -20,9 +31,13 @@ def serverless_func(container):
     
     exists, count = container_exists(container)
     if exists:
-        execute(container)
+        print("Container", container, "exists!")
+        #if in use:
+            #create_container(container,True,count)
+        #execute(container)
     else:
-        print("Container", container, "doesn't exist!")
+        print("Container", container, "doesnt exist!")
+        create_container(container,False,count) # Count = 0
 
     end_time_obj = datetime.now()
     end_time = end_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
