@@ -40,9 +40,9 @@ def execute(container):
     cmd2 = "docker exec -i %s python test_function.py"%(container)
     os.popen(cmd2)
     cmd3 = "docker container kill %s"%(container)
-    os.popen(cmd2)
+    os.popen(cmd3)
     cmd4 = "docker container rm %s"%(container)
-    os.popen(cmd2)
+    os.popen(cmd4)
 
 def serverless_func(container):
     start_time_obj = datetime.now()
