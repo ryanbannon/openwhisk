@@ -18,6 +18,7 @@ def execute(container):
     else:
         print("Container", container, "doesn't exist!")
     end_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")
-    print(start_time, end_time)
+    time_diff = end_time - start_time
+    print(start_time, end_time, time_diff.total_seconds())
 
 execute('abc_123')
