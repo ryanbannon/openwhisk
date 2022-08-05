@@ -3,7 +3,7 @@ import os
 
 def container_exists(container):
     cmd = "docker ps --format '{{.Names}}' | grep %s"%(container)
-    list = os.popen(cmd).readlines().strip()
+    list = os.popen(cmd).readlines()
     cmd2 = "docker ps --format '{{.Names}}' | grep %s | wc -l"%(container)
     count =  os.popen(cmd2).read().strip()
 
@@ -55,7 +55,7 @@ def serverless_func(container):
     if exists:
         print("Container", container, "exists!")
         print(list)
-        name = list[0]
+        name = list[0].rstrip('\n')
     else:
         print("Container", container, "doesnt exist!")
         name = create_container(container,False,count) # Count = 0
