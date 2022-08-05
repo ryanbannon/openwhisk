@@ -1,5 +1,6 @@
 from datetime import datetime
 from time import sleep
+import sys
 import os
 
 def container_exists(container):
@@ -70,3 +71,4 @@ def serverless_func(container,function):
     print(start_time, end_time, time_diff.total_seconds())
 
 serverless_func('abc_123','test_function')
+print(sys.argv[1])
