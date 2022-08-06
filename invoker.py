@@ -24,7 +24,7 @@ def container_in_use(container):
     return (in_use)
 
 def create_container(container,in_use,count):
-    sleep(2)
+    sleep(3)
     if in_use:
         print("Creating container because others are in use")
         cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_%s python:3"%(container,count+1)

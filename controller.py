@@ -36,6 +36,7 @@ total_time = int(install_time) + int(execution_time) #Calculate total execution 
 
 # execution_type = "cold"
 # install_time = 1 / get from registry
-with open('functions_list.csv', 'a') as file:
-    writer = csv.writer(file)
+with open('predictions/experiment_1_2_times.csv', 'a') as file:
+    print(file.read())
+    #writer = csv.writer(file)
     #writer.writerow([request_time, function, execution_type]) # ([request_time, function, total_time, execution_type])
