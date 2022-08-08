@@ -19,9 +19,14 @@ def create_container(container):
     cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_%s python:3"%(container,str(uuid.uuid1()))
     os.popen(cmd)
 
-container = str(sys.argv[1])
-predictions = pd.read_csv('predictions/experiment_1_2_times.csv')
+if(sys.argv[1] == 1):
+    predictions = pd.read_csv('predictions/Experiment_1/experiment_1_2_times.csv')
+elif(sys.argv[1] == 2):
+    predictions = pd.read_csv('predictions/Experiment_2/experiment_2_2_times.csv')
+else:
+    exit()
 predictions = predictions['wait']
+container = str(sys.argv[2])
 for i in predictions:
     seconds = round(i*0.001,2) # Convert milliseconds to seconds for sleep method - 0.001 * time
     exists, list = container_exists(container)

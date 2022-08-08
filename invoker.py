@@ -39,7 +39,7 @@ def execute(container,function):
         name = create_container(container)
         execute(name,function)
 
-def serverless_func(container,function):
+def serverless_func(experiment,container,function):
     start_time_obj = datetime.now()
     start_time = start_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
     container = str(container)
@@ -59,8 +59,15 @@ def serverless_func(container,function):
     time_diff = end_time_obj - start_time_obj
     run_time = int(time_diff.total_seconds()*1000)
 
-    with open('predictions/experiment_1_2_results.csv', 'a') as file:
+    if(experiment == 1):
+        results = 'predictions/Experiment_1/experiment_1_2_results.csv'
+    elif(experiment == 2):
+        results = 'predictions/Experiment_2/experiment_2_2_results.csv'
+    else:
+        exit()
+
+    with open(results, 'a') as file:
         writer = csv.writer(file)
         writer.writerow([start_time, end_time, run_time, name, function, type])
 
-serverless_func(sys.argv[1],sys.argv[2])
+serverless_func(sys.argv[1],sys.argv[2],sys.argv[3])
