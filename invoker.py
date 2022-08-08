@@ -3,6 +3,7 @@ from time import sleep
 import csv
 import sys
 import os
+import uuid
 
 def container_exists(container):
     cmd = "docker ps --format '{{.Names}}' | grep %s"%(container)
@@ -15,25 +16,12 @@ def container_exists(container):
         exists = False
     return (exists,list)
 
-def container_in_use(container):
-    cmd = "ps -ef | grep %s | grep docker | wc -l"%(container)
-    count =  os.popen(cmd).read().strip()
-    if int(count) >= 1:
-        in_use = True
-    else:
-        in_use = False
-    return (in_use)
-
-def create_container(container,in_use,count):
-    sleep(1)
-    if in_use:
-        print("Creating container because others are in use")
-        cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_%s python:3"%(container,count+1)
-        name = container+'_'+str(count+1)
-    else:
-        print("Creating container because none exist")
-        cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_1 python:3"%(container)
-        name = container+'_1'
+def create_container(container):
+    sleep(2)
+    guid = str(uuid.uuid1())
+    name = container+'_'+guid
+    print("Creating container")
+    cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s python:3"%(name)
     os.popen(cmd)
     return name
 
@@ -50,8 +38,8 @@ def execute(container,function):
         os.popen(cmd4)
     except:
         type = "cold"
-        name = create_container(container=container,in_use=True,count=count)
-        execute(name,function,count)
+        name = create_container(container)
+        execute(name,function)
 
 def serverless_func(container,function):
     start_time_obj = datetime.now()
@@ -59,18 +47,16 @@ def serverless_func(container,function):
     container = str(container)
     function = str(function)+".py"
     exists, list = container_exists(container)
-    #count = len(list)
     if exists:
         type = "warm"
         print("Container exists!")
-        print(list)
         name = list[0].rstrip('\n')
     else:
         type = "cold"
         print("Container doesnt exist!")
-        name = create_container(container=container,in_use=False,count=count) # Count = 0
+        name = create_container(container) # Count = 0
 
-    execute(name,function,count)
+    execute(name,function)
 
     end_time_obj = datetime.now()
     end_time = end_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
