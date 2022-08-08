@@ -88,7 +88,7 @@
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">sudo python ~/openwhisk/invoker.py 2 experiment_serverless_2 test_function</stringProp>
+                <stringProp name="Argument.value">sudo python /home/ubuntu/openwhisk/invoker.py 2 experiment_serverless_2 test_function</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
