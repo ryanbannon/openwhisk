@@ -21,7 +21,7 @@
         <boolProp name="recycle">true</boolProp>
         <stringProp name="shareMode">shareMode.all</stringProp>
         <boolProp name="stopThread">false</boolProp>
-        <stringProp name="variableNames">counter,app,func,end_timestamp,duration,start_timestamp,Year,Month,Weekday Name,func_counts,wait</stringProp>
+        <stringProp name="variableNames">datetime,app,func,end_timestamp,duration,start_timestamp,date,counter,wait</stringProp>
       </CSVDataSet>
       <hashTree/>
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
@@ -58,14 +58,14 @@
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">/home/ubuntu/experiment_1_logs.csv</stringProp>
+        <stringProp name="filename">/home/ubuntu/openwhisk/predictions/Experiment_1/experiment_1_2_logs.csv</stringProp>
       </ResultCollector>
       <hashTree/>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">78451</stringProp>
+          <stringProp name="LoopController.loops">2527</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>
@@ -88,7 +88,7 @@
               </elementProp>
               <elementProp name="" elementType="Argument">
                 <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">sudo wsk -i action invoke --result ${func}</stringProp>
+                <stringProp name="Argument.value">sudo python /home/ubuntu/openwhisk/invoker.py 1 experiment_serverless_1 test_function</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
               </elementProp>
             </collectionProp>
