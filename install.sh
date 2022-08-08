@@ -63,3 +63,6 @@ sudo wsk -i action create 58b5ab07aba3f2312b7c99f7d4561e7195fa81744cad27b6e989fb
 sudo wsk -i action create 0b1826008749cba0443c854732e217364d96c3f6d124b510f1e6b2dd847cffca --kind python:3 ~/openwhisk/python_function.py
 sudo wsk -i action create 52543d2fdbdfb711086dbf73725c9b5866f6e6d08cbf9afa054272689043c6cf --kind python:3 ~/openwhisk/python_function.py
 sudo wsk -i action create 88261f9085de9ebc40ecb55d4fa39d839a00ba792a1b741a26ca926114aab474 --kind python:3 ~/openwhisk/python_function.py
+
+# Pandas required for experiment scripts
+sudo pip install pandas

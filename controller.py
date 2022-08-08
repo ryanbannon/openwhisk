@@ -14,7 +14,7 @@ def container_exists(container):
         exists = False
     return (exists,list)
 
-def create_container(container,count):
+def create_container(container):
     print("Creating container")
     cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_1 python:3"%(container)
     os.popen(cmd)
