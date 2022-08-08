@@ -16,19 +16,16 @@ def container_exists(container):
     return (exists,list)
 
 def create_container(container):
-    print("Creating container")
     cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_%s python:3"%(container,str(uuid.uuid1()))
     os.popen(cmd)
 
 container = str(sys.argv[1])
-predictions = pd.read_csv('predictions/experiment_1_2_times_copy.csv')
+predictions = pd.read_csv('predictions/experiment_1_2_times.csv')
 predictions = predictions['wait']
 for i in predictions:
     seconds = round(i*0.001,2) # Convert milliseconds to seconds for sleep method - 0.001 * time
-    print(seconds)
     exists, list = container_exists(container)
     count = len(list)
     if not exists:
-        print("Container doesnt exist!")
         create_container(container)
     sleep(seconds)
