@@ -19,12 +19,13 @@ def create_container(container):
     cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_%s python:3"%(container,str(uuid.uuid1()))
     os.popen(cmd)
 
-if(sys.argv[1] == 1):
+if(str(sys.argv[1]) == '1'):
     predictions = pd.read_csv('predictions/Experiment_1/experiment_1_2_times.csv')
-elif(sys.argv[1] == 2):
+elif(str(sys.argv[1]) == '2'):
     predictions = pd.read_csv('predictions/Experiment_2/experiment_2_2_times.csv')
 else:
     exit()
+
 predictions = predictions['wait']
 container = str(sys.argv[2])
 for i in predictions:
