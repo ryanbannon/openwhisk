@@ -1,5 +1,6 @@
 from datetime import datetime
 from time import sleep
+import csv
 import sys
 import os
 
@@ -24,7 +25,7 @@ def container_in_use(container):
     return (in_use)
 
 def create_container(container,in_use,count):
-    sleep(3)
+    sleep(1)
     if in_use:
         print("Creating container because others are in use")
         cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_%s python:3"%(container,count+1)
@@ -36,16 +37,21 @@ def create_container(container,in_use,count):
     os.popen(cmd)
     return name
 
-def execute(container,function):
-    print("Container", container, "exists!")
-    cmd = "docker cp %s %s:/foo/"%(function,container)
-    os.popen(cmd)
-    cmd2 = "docker exec -i %s python %s"%(container,function)
-    os.popen(cmd2)
-    cmd3 = "docker container kill %s"%(container)
-    os.popen(cmd3)
-    cmd4 = "docker container rm %s"%(container)
-    os.popen(cmd4)
+def execute(container,function,count):
+    try:
+        print("Container", container, "exists!")
+        cmd = "docker cp %s %s:/foo/"%(function,container)
+        os.popen(cmd)
+        cmd2 = "docker exec -i %s python %s"%(container,function)
+        os.popen(cmd2)
+        cmd3 = "docker container kill %s"%(container)
+        os.popen(cmd3)
+        cmd4 = "docker container rm %s"%(container)
+        os.popen(cmd4)
+    except:
+        type = "cold"
+        name = create_container(container=container,in_use=True,count=count)
+        execute(name,function,count)
 
 def serverless_func(container,function):
     start_time_obj = datetime.now()
@@ -55,19 +61,26 @@ def serverless_func(container,function):
     exists, list = container_exists(container)
     count = len(list)
     if exists:
+        type = "warm"
         print("Container", container, "exists!")
         print(list)
         name = list[0].rstrip('\n')
     else:
+        type = "cold"
         print("Container", container, "doesnt exist!")
         name = create_container(container=container,in_use=False,count=count) # Count = 0
 
     print("Execute",name)
-    execute(name,function)
+    execute(name,function,count)
 
     end_time_obj = datetime.now()
     end_time = end_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
     time_diff = end_time_obj - start_time_obj
-    print(start_time, end_time, int(time_diff.total_seconds()*1000))
+    run_time = int(time_diff.total_seconds()*1000)
+    print(start_time, end_time, run_time) 
+
+    with open('predictions/experiment_1_2_results.csv', 'a') as file:
+        writer = csv.writer(file)
+        writer.writerow([start_time, run_time, name, function, type])
 
 serverless_func(sys.argv[1],sys.argv[2])

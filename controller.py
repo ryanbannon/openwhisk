@@ -1,9 +1,7 @@
-from datetime import datetime
 from time import sleep
 import os
-import csv
-
-# Need to convert milliseconds to seconds - 0.001 * time
+import pandas as pd
+import sys
 
 def container_exists(container):
     cmd = "docker ps --format '{{.Names}}' | grep %s"%(container)
@@ -16,27 +14,20 @@ def container_exists(container):
         exists = False
     return (exists,list)
 
-def create_container(container,in_use,count):
-    sleep(2)
-    if in_use:
-        print("Creating container because others are in use")
-        cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_%s python:3"%(container,count+1)
-        name = container+'_'+str(count+1)
-    else:
-        print("Creating container because none exist")
-        cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_1 python:3"%(container)
-        name = container+'_1'
+def create_container(container,count):
+    print("Creating container")
+    cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_1 python:3"%(container)
     os.popen(cmd)
-    return name
 
-'''
-execution_time = execute(container, function) #execute the function in new container
-total_time = int(install_time) + int(execution_time) #Calculate total execution time
-'''
-
-# execution_type = "cold"
-# install_time = 1 / get from registry
-with open('predictions/experiment_1_2_times.csv', 'a') as file:
-    print(file.read())
-    #writer = csv.writer(file)
-    #writer.writerow([request_time, function, execution_type]) # ([request_time, function, total_time, execution_type])
+container = "expr_"+str(sys.argv[1])
+predictions = pd.read_csv('predictions/experiment_1_2_times.csv')
+predictions = predictions['wait']
+for i in predictions:
+    seconds = round(i*0.001,2) # Convert milliseconds to seconds for sleep method - 0.001 * time
+    print(seconds)
+    exists, list = container_exists(container)
+    count = len(list)
+    if not exists:
+        print("Container", container, "doesnt exist!")
+        create_container(container)
+    sleep(seconds)
