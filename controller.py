@@ -2,6 +2,7 @@ from time import sleep
 import os
 import pandas as pd
 import sys
+import uuid
 
 def container_exists(container):
     cmd = "docker ps --format '{{.Names}}' | grep %s"%(container)
@@ -16,7 +17,7 @@ def container_exists(container):
 
 def create_container(container):
     print("Creating container")
-    cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_1 python:3"%(container)
+    cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_%s python:3"%(container,str(uuid.uuid1()))
     os.popen(cmd)
 
 container = "expr_"+str(sys.argv[1])
@@ -28,6 +29,6 @@ for i in predictions:
     exists, list = container_exists(container)
     count = len(list)
     if not exists:
-        print("Container", container, "doesnt exist!")
+        print("Container doesnt exist!")
         create_container(container)
     sleep(seconds)
