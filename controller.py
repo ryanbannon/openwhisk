@@ -20,7 +20,7 @@ def create_container(container):
     cmd = "docker run -v /doesnt/exist:/foo -w /foo -dit --name %s_%s python:3"%(container,str(uuid.uuid1()))
     os.popen(cmd)
 
-container = "expr_"+str(sys.argv[1])
+container = str(sys.argv[1])
 predictions = pd.read_csv('predictions/experiment_1_2_times.csv')
 predictions = predictions['wait']
 for i in predictions:

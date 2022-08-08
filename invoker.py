@@ -37,9 +37,9 @@ def create_container(container,in_use,count):
     os.popen(cmd)
     return name
 
-def execute(container,function,count):
+def execute(container,function):
     try:
-        print("Container", container, "exists!")
+        print("Executing "+container)
         cmd = "docker cp %s %s:/foo/"%(function,container)
         os.popen(cmd)
         cmd2 = "docker exec -i %s python %s"%(container,function)
@@ -56,21 +56,20 @@ def execute(container,function,count):
 def serverless_func(container,function):
     start_time_obj = datetime.now()
     start_time = start_time_obj.strftime("%Y-%m-%d %H:%M:%S.%f")
-    container = "expr_"+str(container)
+    container = str(container)
     function = str(function)+".py"
     exists, list = container_exists(container)
-    count = len(list)
+    #count = len(list)
     if exists:
         type = "warm"
-        print("Container", container, "exists!")
+        print("Container exists!")
         print(list)
         name = list[0].rstrip('\n')
     else:
         type = "cold"
-        print("Container", container, "doesnt exist!")
+        print("Container doesnt exist!")
         name = create_container(container=container,in_use=False,count=count) # Count = 0
 
-    print("Execute",name)
     execute(name,function,count)
 
     end_time_obj = datetime.now()
