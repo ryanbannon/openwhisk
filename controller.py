@@ -21,7 +21,7 @@ def create_container(container):
     os.popen(cmd)
 
 container = str(sys.argv[1])
-predictions = pd.read_csv('predictions/experiment_1_2_times.csv')
+predictions = pd.read_csv('predictions/experiment_1_2_times_copy.csv')
 predictions = predictions['wait']
 for i in predictions:
     seconds = round(i*0.001,2) # Convert milliseconds to seconds for sleep method - 0.001 * time
