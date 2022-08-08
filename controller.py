@@ -20,9 +20,9 @@ def create_container(container):
     os.popen(cmd)
 
 if(str(sys.argv[1]) == '1'):
-    predictions = pd.read_csv('predictions/Experiment_1/experiment_1_2_times.csv')
+    predictions = pd.read_csv('~/openwhisk/predictions/Experiment_1/experiment_1_2_times.csv')
 elif(str(sys.argv[1]) == '2'):
-    predictions = pd.read_csv('predictions/Experiment_2/experiment_2_2_times.csv')
+    predictions = pd.read_csv('~/openwhisk/predictions/Experiment_2/experiment_2_2_times.csv')
 else:
     exit()
 

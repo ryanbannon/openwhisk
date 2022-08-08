@@ -60,9 +60,9 @@ def serverless_func(experiment,container,function):
     run_time = int(time_diff.total_seconds()*1000)
 
     if(str(experiment) == '1'):
-        results = 'predictions/Experiment_1/experiment_1_2_results.csv'
+        results = '~/openwhisk/predictions/Experiment_1/experiment_1_2_results.csv'
     elif(str(experiment) == '2'):
-        results = 'predictions/Experiment_2/experiment_2_2_results.csv'
+        results = '~/openwhisk/predictions/Experiment_2/experiment_2_2_results.csv'
     else:
         exit()
 
