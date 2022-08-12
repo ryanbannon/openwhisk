@@ -31,8 +31,7 @@ container = str(sys.argv[2])
 for i in predictions:
     seconds = round(i*0.001,2) # Convert milliseconds to seconds for sleep method - 0.001 * time
     exists, list = container_exists(container)
-    count = len(list)
+    #count = len(list)
     if not exists:
         create_container(container)
     sleep(seconds)
-

@@ -15,7 +15,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 sudo groupadd docker
 sudo usermod -aG docker $USER
-#newgrp docker
 #sudo docker-compose --version
 
 # Install OpenWhisk
@@ -31,9 +30,9 @@ sudo make -C ~/openwhisk-devtools/docker-compose/ quick-start
 sudo apt update
 sudo apt install openjdk-11-jdk --assume-yes
 sudo wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.4.3.zip
-sudo unzip apache-jmeter-5.4.3.zip
-sudo mv apache-jmeter-5.4.3 jmeter
-sudo mv jmeter /tmp
+sudo unzip ~/apache-jmeter-5.4.3.zip
+sudo mv ~/apache-jmeter-5.4.3 ~/jmeter
+sudo mv ~/jmeter /tmp
 echo 'export PATH="$PATH:/tmp/jmeter/bin"' >> ~/.bashrc
 source ~/.bashrc
 
