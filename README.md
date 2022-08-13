@@ -1,4 +1,4 @@
-# Leveraging Machine Learning to Reduce Cold Start Latency of Containers in Serverless Computing
+## Leveraging Machine Learning to Reduce Cold Start Latency of Containers in Serverless Computing
 
 `git clone https://github.com/ryanbannon/openwhisk.git`
 
